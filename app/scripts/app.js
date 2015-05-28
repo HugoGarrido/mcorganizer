@@ -18,7 +18,11 @@ angular
     'ngTouch',
     'xml'
   ])
-  .config(function ($routeProvider, x2jsProvider) {
+
+  .config(function ($routeProvider, $httpProvider, x2jsProvider) {
+
+    $httpProvider.interceptors.push('xmlHttpInterceptor');
+
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -31,6 +35,14 @@ angular
       .when('/map', {
         templateUrl: 'views/map.html',
         controller: 'MapCtrl'
+      })
+      .when('/admin', {
+        templateUrl: 'views/admin.html',
+        controller: 'AdminCtrl'
+      })
+      .when('/admin/:imacId', {
+        templateUrl: 'views/admin-detail.html',
+        controller: 'AdminDetailCtrl'
       })
       .otherwise({
         redirectTo: '/'
@@ -51,4 +63,4 @@ angular
        */
     };
 
-  })
+  });
